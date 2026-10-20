@@ -6,7 +6,7 @@
 
 ## Summary
 
-Built a Microsoft Sentinel SIEM environment in Azure to detect, investigate, and respond to real-world SSH brute force attacks. Within 24 hours, detected **223 failed login attempts** from multiple attackers targeting service accounts. Investigated incidents, blocked attacker IPs, and closed cases with proper documentation.
+I built a Microsoft Sentinel lab in Azure to collect Linux authentication logs and investigate SSH password-guessing activity against an internet-facing Ubuntu VM. I used KQL to examine failed authentication events, configured a scheduled analytics rule with entity mapping, investigated an incident, and configured an NSG deny rule for selected source addresses.
 
 ---
 
@@ -123,9 +123,11 @@ Within hours, attackers found the exposed VM and started brute force attempts.
 
 ### Created a Scheduled Analytics Rule & Configured Entity Mapping
 
-Built a custom analytics rule to detect brute force attacks. The rule triggers when an IP address has 5 or more failed SSH login attempts.
+I created a scheduled analytics rule that selects groups with at least five failed SSH authentication events for the same source IP, attempted username, and host within the rule's configured query lookback.
 
-Added entity mapping so the attacker IP and targeted username appear directly in incidents. This saves time during investigation—no need to dig through raw logs to find the key details.
+Because the query groups by all three fields, attempts spread across different usernames are counted separately. The threshold is a lab configuration choice, not proof by itself that the activity is malicious.
+
+I mapped the extracted source IP and attempted username to Sentinel entities so they could appear in the incident investigation. These entities help organize the evidence; the original log records remain important for validating the findings.
 
 - **IP Entity** → `Attacker_IP`
 - **Account Entity** → `TargetUsername`
