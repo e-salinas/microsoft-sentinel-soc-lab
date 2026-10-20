@@ -8,7 +8,7 @@
 
 I built a Microsoft Sentinel lab in Azure to collect Linux authentication logs and investigate SSH password-guessing activity against an internet-facing Ubuntu VM. I used KQL to examine failed authentication events, configured a scheduled analytics rule with entity mapping, investigated an incident, and configured an NSG deny rule for selected source addresses.
 
-***Revised***: October 20, 2026
+**Documentation revised: October 20, 2026.** I revisited this earlier lab to review the evidence and improve my explanations of query grouping, event counts, entity mapping, and firewall rule priority.
 
 ---
 
@@ -82,7 +82,7 @@ From the Content Hub, installed the Syslog solution to enable Linux log collecti
 
 ### Created a Data Collection Rule
 
-Configured a Data Collection Rule (DCR) to specify which logs to collect and where to send them. Set it to collect LOG_AUTH events, which capture all authentication activity including failed SSH logins.
+I configured a Data Collection Rule (DCR) to collect authentication-related Syslog events from the Ubuntu VM and send them to the Log Analytics workspace. The collected events included failed SSH authentication messages used by my detection query.
 
 ![Data Collection Rule](screenshots/data-collection-rule.png)
 
