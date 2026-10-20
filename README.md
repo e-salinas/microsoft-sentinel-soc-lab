@@ -146,12 +146,16 @@ Syslog
 
 ## Attack Results
 
-Within 24 hours, the honeypot detected:
+I queried failed SSH authentication events over a 24-hour lookback and grouped the results by source IP and attempted username.
 
-| Metric | Value |
-|--------|-------|
-| Total failed login attempts | 223 |
-| Top targeted account | root (21 attempts) |
+| Source IP | Attempted Username | Failed Authentication Events |
+|-----------|--------------------|------------------------------|
+| 152.42.143.239 | root | 21 |
+| 159.223.225.34 | root | 18 |
+| 159.223.225.34 | postgres | 18 |
+| 159.223.225.34 | mysql | 18 |
+
+These are selected rows visible in the query screenshot. The query displays up to 15 groups; this table is not an overall event total.
 
 **Targeted usernames:** `root`, `postgres`, `mysql`, `ubuntu`, `test`, `user`
 
@@ -165,9 +169,9 @@ The observed attempts targeted common usernames such as `postgres`, `mysql`, `ro
 
 When alerts triggered, Sentinel grouped them into an incident. The investigation graph showed:
 
-- **2 attacker IPs**: `159.223.225.34` and `152.42.13.239`
-- **7 targeted usernames**
-- **16 alerts** over 2 hours
+- **2 source IPs**: `159.223.225.34` and `152.42.143.239`
+- **7 username entities** associated with the incident
+- **16 alerts** shown in the incident
 
 ![Incidents](screenshots/incidents.png)
 
@@ -179,7 +183,7 @@ When alerts triggered, Sentinel grouped them into an incident. The investigation
 
 Added investigation notes to the incident:
 
-> "Investigated brute force attempt from 159.223.225.34 and 152.42.13.239 targeting 7 service accounts. 16 alerts over 2 hours indicates automated attack. Confirmed malicious. Taking remediation action - blocking IPs in NSG."
+> "Investigated brute force attempt from 159.223.225.34 and 152.42.143.239 targeting 7 service accounts. 16 alerts over 2 hours indicates automated attack. Confirmed malicious. Taking remediation action - blocking IPs in NSG."
 
 ### Blocked Attacker IPs
 
