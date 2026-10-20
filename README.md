@@ -8,6 +8,8 @@
 
 I built a Microsoft Sentinel lab in Azure to collect Linux authentication logs and investigate SSH password-guessing activity against an internet-facing Ubuntu VM. I used KQL to examine failed authentication events, configured a scheduled analytics rule with entity mapping, investigated an incident, and configured an NSG deny rule for selected source addresses.
 
+***Revised***: October 20, 2026
+
 ---
 
 ## Tools Used
@@ -200,6 +202,10 @@ I used the incident management workflow to document the assessment and response.
 ![Incident Closed](screenshots/incident-closed.png)
 
 ---
+
+## Lab Teardown
+
+After completing the exercise, I deleted the Azure resources used for this lab. The screenshots document the environment at the time of the exercise; it is no longer running.
 
 ## What I Learned
 
