@@ -183,23 +183,19 @@ When alerts triggered, Sentinel grouped them into an incident. The investigation
 
 ### Documented Findings
 
-Added investigation notes to the incident:
+I documented the observed password-guessing activity, the source IPs associated with the incident, and the attempted usernames. I assessed the activity as suspicious and selected an NSG deny rule as the manual response.
 
-> "Investigated brute force attempt from 159.223.225.34 and 152.42.143.239 targeting 7 service accounts. 16 alerts over 2 hours indicates automated attack. Confirmed malicious. Taking remediation action - blocking IPs in NSG."
+### Configured an NSG Deny Rule
 
-### Blocked Attacker IPs
+I configured the `Block_Attackers` deny rule for selected source addresses. Its priority of 190 places it ahead of the existing `DANGER_AllowAll` rule at priority 200.
 
-Created a Deny rule in the Network Security Group to block both attacker IPs from reaching the honeypot.
+This demonstrates why rule order matters: the more specific deny rule must be evaluated before the broad allow rule.
 
 ![NSG Block Rule](screenshots/nsg-block-rule.png)
 
 ### Closed the Incident
 
-Resolved the incident with proper classification:
-
-- **Status**: Resolved
-- **Classification**: True Positive – Suspicious activity
-- **Closing note**: "Took remediation action - bloacked IPs in NSG."
+I used the incident management workflow to document the assessment and response. The closure screenshot shows the selected status of **Resolved**, classification of **True positive**, and an investigation note describing the NSG action.
 
 ![Incident Closed](screenshots/incident-closed.png)
 
