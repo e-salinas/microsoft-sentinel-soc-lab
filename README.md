@@ -203,13 +203,17 @@ I used the incident management workflow to document the assessment and response.
 
 ## What I Learned
 
-**Entity mapping makes a difference.** My first version of the detection rule worked but didn't show attacker details in the incident view. After adding entity mapping, the IP and username appeared right in the incident—the way it should work in a production SOC.
+**Collection determines visibility.** The data collection rule controls which events reach the workspace. A detection query depends on those events being collected.
 
-**Attackers move fast.** Within hours of exposing the VM, automated scanners found it. This reinforced why defense in depth matters—firewalls, strong passwords, and monitoring all work together.
+**Grouping changes detection behavior.** My query counts failures separately for each source IP, attempted username, and host. Attempts distributed across usernames may not reach the threshold in any one group.
 
-**KQL speeds up investigation.** Instead of scrolling through raw logs, I wrote queries to summarize attacker activity in seconds.
+**Entity mapping supports investigation.** Mapping source IPs and attempted usernames makes related entities easier to examine in an incident. An attempted username does not prove that the account exists.
 
-**Documentation closes the loop.** Adding investigation notes and proper classification creates an audit trail. If another analyst looks at this incident, they know exactly what happened and what action was taken.
+**Events and alerts are different.** Failed authentication records, grouped query results, and incident alerts represent different units and should not be counted interchangeably.
+
+**Firewall priority matters.** The NSG deny rule had priority 190, ahead of the broad allow rule at 200. Reviewing rule order is part of checking the response configuration.
+
+**Documentation should connect actions to evidence.** Queries, incident views, and configuration screenshots each support different parts of the investigation.
 
 ---
 
