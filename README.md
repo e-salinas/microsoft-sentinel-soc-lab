@@ -155,7 +155,7 @@ Within 24 hours, the honeypot detected:
 
 **Targeted usernames:** `root`, `postgres`, `mysql`, `ubuntu`, `test`, `user`
 
-The attackers went after common service accounts (postgres, mysql) and default accounts (root, ubuntu). This pattern indicates automated credential stuffing—bots scanning the internet for weak SSH passwords.
+The observed attempts targeted common usernames such as `postgres`, `mysql`, `root`, and `ubuntu`. The repeated failures are consistent with automated SSH password guessing. The usernames alone do not establish that those accounts existed on the VM or that previously compromised credentials were used.
 
 ![KQL Results](screenshots/kql-results.png)
 
